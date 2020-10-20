@@ -33,6 +33,7 @@ yargs.command({
     title: {
       describe: "Note title",
       demandOption: true,
+      type: "string",
     },
   },
   handler(argv) {
@@ -44,15 +45,22 @@ yargs.command({
   command: "list",
   describe: "List the notes",
   handler() {
-    console.log("Here are your notes!");
+    notes.listNotes();
   },
 });
 
 yargs.command({
   command: "read",
   describe: "Read a note",
-  handler() {
-    console.log("Reading note!");
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string"
+    },
+  },
+  handler(argv) {
+    notes.readNote(argv.title);
   },
 });
 
